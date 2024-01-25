@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: routers,
       debugShowCheckedModeBanner: false,
-      title: 'My App Flutter',
+      title: 'My App Futter',
     );
   }
 }
