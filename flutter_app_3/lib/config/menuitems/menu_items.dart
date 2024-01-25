@@ -65,19 +65,19 @@ List<MenuItem> listMenuItems = [
       icon: Icons.arrow_circle_right_outlined),
   MenuItem(
       title: 'Drag a UI element',
-      router: '',
+      router: '/actividad_14',
       icon: Icons.arrow_circle_right_outlined),
   //! Esta parte es la de la seccion de Gestures (3 elementos de la lista)
   MenuItem(
       title: 'Add Material touch ripples',
-      router: '',
+      router: '/actividad_15',
       icon: Icons.arrow_circle_right_outlined),
   MenuItem(
       title: 'Handle taps',
-      router: '',
+      router: '/actividad_16',
       icon: Icons.arrow_circle_right_outlined),
   MenuItem(
       title: 'Implement swipe to dismiss',
-      router: '',
+      router: '/actividad_17',
       icon: Icons.arrow_circle_right_outlined),
 ];

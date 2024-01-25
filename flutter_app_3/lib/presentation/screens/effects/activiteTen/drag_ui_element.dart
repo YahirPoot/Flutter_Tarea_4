@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_3/presentation/views/effectActivite/tenAct/customer_card.dart';
+import 'package:flutter_app_3/utils/utils_activite_ten.dart';
+import 'package:go_router/go_router.dart';
 
 class StoreFood extends StatelessWidget {
   const StoreFood({super.key});
@@ -10,7 +13,6 @@ class StoreFood extends StatelessWidget {
       debugShowCheckedModeBanner: false,
     );
   }
-
 }
 
 const List<Item> _items = [
@@ -87,12 +89,17 @@ class _ExampleDragAndDropState extends State<ExampleDragAndDrop>
 
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
-      iconTheme: const IconThemeData(color: Color(0xFFF64209)),
+      leading: IconButton(
+        onPressed: () {
+          context.go('/');
+        },
+        icon: const Icon(Icons.arrow_back),
+      ),
       title: Text(
         'Order Food',
         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
               fontSize: 36,
-              color: const Color(0xFFF64209),
+              color: Colors.cyan,
               fontWeight: FontWeight.bold,
             ),
       ),
@@ -186,90 +193,6 @@ class _ExampleDragAndDropState extends State<ExampleDragAndDrop>
               customer: customer,
             );
           },
-        ),
-      ),
-    );
-  }
-}
-
-class CustomerCart extends StatelessWidget {
-  const CustomerCart({
-    super.key,
-    required this.customer,
-    this.highlighted = false,
-    this.hasItems = false,
-  });
-
-  final Customer customer;
-  final bool highlighted;
-  final bool hasItems;
-
-  @override
-  Widget build(BuildContext context) {
-    final textColor = highlighted ? Colors.white : Colors.black;
-
-    return Transform.scale(
-      scale: highlighted ? 1.075 : 1.0,
-      child: Material(
-        elevation: highlighted ? 8 : 4,
-        borderRadius: BorderRadius.circular(22),
-        color: highlighted ? const Color(0xFFF64209) : Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 12,
-            vertical: 24,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ClipOval(
-                child: SizedBox(
-                  width: 46,
-                  height: 46,
-                  child: Image(
-                    image: customer.imageProvider,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                customer.name,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: textColor,
-                      fontWeight:
-                          hasItems ? FontWeight.normal : FontWeight.bold,
-                    ),
-              ),
-              Visibility(
-                visible: hasItems,
-                maintainState: true,
-                maintainAnimation: true,
-                maintainSize: true,
-                child: Column(
-                  children: [
-                    const SizedBox(height: 4),
-                    Text(
-                      customer.formattedTotalItemPrice,
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                            color: textColor,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      '${customer.items.length} item${customer.items.length != 1 ? 's' : ''}',
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            color: textColor,
-                            fontSize: 12,
-                          ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
         ),
       ),
     );
@@ -378,39 +301,5 @@ class DraggingListItem extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-@immutable
-class Item {
-  const Item({
-    required this.totalPriceCents,
-    required this.name,
-    required this.uid,
-    required this.imageProvider,
-  });
-  final int totalPriceCents;
-  final String name;
-  final String uid;
-  final ImageProvider imageProvider;
-  String get formattedTotalItemPrice =>
-      '\$${(totalPriceCents / 100.0).toStringAsFixed(2)}';
-}
-
-class Customer {
-  Customer({
-    required this.name,
-    required this.imageProvider,
-    List<Item>? items,
-  }) : items = items ?? [];
-
-  final String name;
-  final ImageProvider imageProvider;
-  final List<Item> items;
-
-  String get formattedTotalItemPrice {
-    final totalPriceCents =
-        items.fold<int>(0, (prev, item) => prev + item.totalPriceCents);
-    return '\$${(totalPriceCents / 100.0).toStringAsFixed(2)}';
   }
 }

@@ -1,4 +1,8 @@
 import 'package:flutter_app_3/presentation/screens.dart';
+import 'package:flutter_app_3/presentation/screens/effects/activiteTen/drag_ui_element.dart';
+import 'package:flutter_app_3/presentation/screens/gestures/activiteFirst/material_touch.dart';
+import 'package:flutter_app_3/presentation/screens/gestures/activiteSecond/handle_taps.dart';
+import 'package:flutter_app_3/presentation/screens/gestures/activiteThree/swipe_dessins.dart';
 import 'package:go_router/go_router.dart';
 
 final routers = GoRouter(
@@ -44,6 +48,15 @@ final routers = GoRouter(
       path: '/actividad_13',
       builder: (context, state) => const App()),
   GoRoute(
-      path: '/actividad_13',
-      builder: (context, state) => const App()),
+      path: '/actividad_14',
+      builder: (context, state) => const StoreFood()),
+  GoRoute(
+      path: '/actividad_15',
+      builder: (context, state) => const MaterialTouch()),
+  GoRoute(
+      path: '/actividad_16',
+      builder: (context, state) => const MainHandle()),
+  GoRoute(
+      path: '/actividad_17',
+      builder: (context, state) => const SwipeDessins()),
 ]);
